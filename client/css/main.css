@@ -1,78 +1,11 @@
-* {
+*{
+    font-size: 4vmin;
     box-sizing: border-box;
 }
 
-body {
-    --background: #192143;
-    --foreground: #4257b2;
-    --button: #192143;
-    --shadow: #444444;
-    --text: white;
-    --cols: 2;
-    --rows: 2;
-}
-
-body[theme=whitez] {
-    --background: #EEE;
-    --foreground: #FFF;
-}
-
-body {
-    background: var(--background);
+body{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     margin: 0;
-    font-size: 4vw;
-    font-family: monospace;
-}
-
-body > content {
-    background: var(--foreground);
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding: 1vmin;
-    box-shadow: 0 0 1vmin 0 var(--shadow);
-    border-radius: .5vmin;
-}
-
-body > content > * > * {
-    margin: auto;
-}
-
-body > content > top {
-    width: 100%;
-    height: 50%;
-    display: grid;
-    padding: 4vmin;
-}
-
-body > content > choices {
-    display: grid;
-    --gap: 10vmin;
-    grid-column-gap: var(--gap);
-    padding: calc(var(--gap) / 2);
-    grid-template-columns: calc(50% - var(--gap) / 2) calc(50% - var(--gap) / 2);
-    width: 100%;
-    height: 50%;
-    justify-items: stretch;
-    align-items: stretch;
-}
-
-body > content > top img {
-    max-height: 100%;
-    max-width: 100%;
-    border-radius: .3vmin;
-    box-shadow: .3vmin .3vmin 1vmin 0 var(--shadow);
-}
-
-body > content > choices > choice {
-    width: 100%;
-    text-align: center;
-}
-
-body > content > choices > choice {
-    background: var(--button);
-    color: var(--text);
-    padding: 2vmin;
-    border-radius: .5vmin;
-    box-shadow: .3vmin .3vmin 1vmin 0 var(--shadow);
 }
