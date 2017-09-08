@@ -9,7 +9,7 @@ namespace loginpage {
     }
 
     function do_register() {
-        location.href = "register.html"; //FIXME URL
+        location.href = "registration.html"; //FIXME URL
         return false; //block form submit
     }
 

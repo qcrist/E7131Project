@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png">
+
+    <link href="css/main.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="scripts/requireconfig.js"></script>
+    <title>Join Group</title>
+    <style>
+        body {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        p {
+            padding: 50px 30px 50px 80px;
+        }
+
+        .button-row {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Join a Group</legend>
+            <p>
+                <label>Search for a group:</label>
+                <input type = "text"
+                       id = "groupname"
+                       value = "Group Name"/>
+                <button class="button" type="button" id="search">Search</button>
+                <button class="button" type="button" id="cancel">Cancel</button>
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>
