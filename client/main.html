@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png">
+
+    <link href="css/main.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="scripts/requireconfig.js"></script>
+    <title>MainPage</title>
+    <style>
+        body {
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        .leftColumn {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+
+        .rightColumn {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+
+        .button {
+            margin-bottom: 15px;
+        }
+
+        table, td {
+            border: 1px solid black;
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="leftColumn">
+        <h1 class="title">Groups</h1>
+        <button class="button" type="button">Add Group</button>
+        <table id="myTable">
+          <tr>
+            <td>Group 1</td>
+          </tr>
+          <tr>
+            <td>Group 2</td>
+          </tr>
+          <tr>
+            <td>Group 3</td>
+          </tr>
+        </table>
+    </div>
+    <div class="rightColumn">
+        <h1 class="title">Profile</h1>
+        <button type="button">View/Edit Profile</button>
+    </div>
+</body>
+</html>
