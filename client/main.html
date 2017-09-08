@@ -45,15 +45,25 @@
     </style>
 </head>
 <body>
+<header>
+    <form action="login.html" id="logout">
+        <button>Logout</button>
+    </form>
+</header>
     <div class="leftColumn">
-        <h1 class="title">Groups</h1>
-        <button class="button" type="button">Add Group</button>
+        <h1 class="title">Your Groups</h1>
+        <form action="create_edit_group.html" class="group-button">
+            <button>New Group</button>
+        </form>
+        <form action="join_group.html" class="group-button">
+            <button>Join Group</button>
+        </form>
         <table id="myTable">
           <tr>
             <td>Group 1</td>
           </tr>
           <tr>
-            <td>Group 2</td>
+            <td><a href="group_info.html">Game of Thrones</a></td>
           </tr>
           <tr>
             <td>Group 3</td>
@@ -62,7 +72,9 @@
     </div>
     <div class="rightColumn">
         <h1 class="title">Profile</h1>
-        <button type="button">View/Edit Profile</button>
+        <form action="profile.html">
+            <button>View/Edit Profile</button>
+        </form>
     </div>
 </body>
 </html>

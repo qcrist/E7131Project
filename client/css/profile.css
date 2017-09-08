@@ -1,0 +1,28 @@
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#userpic {
+    max-width: 70%;
+}
+
+.leftColumn {
+    float: left;
+    padding: 5%;
+    width: 50%;
+}
+.rightColumn {
+    float: right;
+    padding: 5%;
+    width: 50%;
+}
+
+#groupName {
+    padding-top: 5%;
+    text-align: center;
+}
+
+#passwordButton {
+    margin-top: 100px;
+}
