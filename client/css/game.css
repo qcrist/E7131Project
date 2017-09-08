@@ -16,7 +16,7 @@ header {
     padding: 1vmin;
 }
 
-header > button {
+header > form > button {
     background: darkgray;
     border: 1px solid black;
     font-size: 5vmin;
