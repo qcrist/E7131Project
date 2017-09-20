@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png">
+
+    <link href="css/create_edit_group.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="scripts/requireconfig.js"></script>
+    <title>LoginPage</title>
+    <script>
+        requirejs(["scripts/create_edit_group"]);
+    </script>
+    <style>
+        body {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+
+        body > form {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 50% 50%;
+            grid-gap: 2vmin;
+            width: 80vw;
+        }
+
+        span {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        input,.left{
+            text-align: left;
+            margin: 0;
+        }
+
+        .button-row{
+            display: grid;
+            justify-items: stretch;
+            grid-template-columns: 50% 50%;
+            grid-gap: 3vmin;
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+<form action="javascript:history.back()">
+    <span>Name</span><input type="text" name="Name" placeholder="New Member Name Here">
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <span>Select image to upload:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+
+        <!--These lines are in the https://www.w3schools.com/php/php_file_upload.asp template
+        for uploading files. They also have the php to go with it. IDK if the next "submit"
+        lines are necessary, so whoever adds functionality later can test whether they need it.-->
+
+        <span></span>
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+    <div class="button-row">
+        <button id="Cancel">Cancel</button>
+        <button id="Add">Add</button>
+    </div>
+</form>
+</body>
+</html>
