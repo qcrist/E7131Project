@@ -11,6 +11,15 @@ namespace registrationpage {
         var correctEmail = true;
         var correctPasswordFormat = true;
         var correctPasswordMatch = true;
+
+        /**
+         * There is an official standard for valid email addresses known as RFC 2822
+         * The regex below validates email addresses on this format
+         * If interested, read more here: 
+            * https://www.ietf.org/rfc/rfc2822.txt 
+            * http://www.regular-expressions.info/email.html
+        **/
+        var regExp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
         
 
         var alertMessage = "Registration Failed. Please fix the following: ";
@@ -20,10 +29,9 @@ namespace registrationpage {
             alertMessage += "\n\t **Please fix name. Has to be more than three characters.";
         }
 
-        if (email == "" || email.length < 5) {
+        if (email == "" || email.length < 5 || !email.match(regExp)) {
             correctEmail = false;
-            alertMessage += "\n\t **Please fix email. Has to be more than five characters.";
-
+            alertMessage += "\n\t **Please fix email. Has to be more than five characters and valid email address";
         }
 
         if (password == "" || password.length < 5) {
