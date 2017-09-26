@@ -62,13 +62,13 @@
     </style>
 </head>
 <body>
-<form action="#">
-    <span>Name</span><input type="text" name="name" placeholder="First and Last Name">
+<form name="registrationForm" action="#">
+    <span>Name</span><input type="text" name="name" placeholder="First and Last Name" required>
     <span>Gender</span><span class="right">Male <input type="checkbox" name="male" value="false" title="checkbox">
         Female <input type="checkbox" name="female" value="false" title="checkbox"></span>
-    <span>Email</span><input type="text" name="email" placeholder="someone@example.com">
-    <span>Password</span><input type="password" name="password" placeholder="Password">
-    <span>Confirm Password</span><input type="password" name="confirmpassword" placeholder="Re-enter Password">
+    <span>Email</span><input type="text" name="email" placeholder="someone@example.com" required>
+    <span>Password</span><input type="password" name="password" placeholder="Password" required>
+    <span>Confirm Password</span><input type="password" name="confirmpassword" placeholder="Re-enter Password" required>
     <span>Upload Photo</span><span class="right"><input type="file" id="uploadme"><input type="button" id="clickme" value="Upload a photo!"/></span>
 
     <div class="button-row">
