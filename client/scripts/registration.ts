@@ -52,6 +52,7 @@ namespace registrationpage {
             location.href = "main.html";
             return false;
         }
+      return true;
     }
 
     function do_cancel() {

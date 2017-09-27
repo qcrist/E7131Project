@@ -3,18 +3,17 @@ import * as $ from "jquery"
 namespace loginpage {
 
     function do_login() {
-        //FIXME handle login
-        location.href = "main.html"; //FIXME URL
-        return false; //block form submit
+        return true; //do form submit
     }
 
     function do_register() {
-        location.href = "registration.html"; //FIXME URL
+        location.href = "registration.html";
         return false; //block form submit
     }
 
     function do_forgot() {
         alert("stretch goal");
+        return false; //block form submit
     }
 
     $("#login").click(do_login);

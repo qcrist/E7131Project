@@ -36,31 +36,31 @@
             font-weight: bold;
         }
 
-        input,.right{
+        input, .right {
             text-align: right;
             margin: 0;
         }
 
-        input[type=text], input[type=password]{
+        input[type=text], input[type=password] {
             border: none;
             border-bottom: 1px solid black;
         }
 
-        .button-row{
+        .button-row {
             display: grid;
             justify-items: stretch;
             grid-column: 1 / 3;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 3vmin;
             width: 100%;
         }
     </style>
 </head>
 <body>
-<form action="#">
+<form action="/action/login" method="POST">
     <span>Email</span><input type="text" name="email" placeholder="email">
     <span>Password</span><input type="password" name="password" placeholder="password">
-    <span>Remember Me</span><span class="right"><input type="checkbox" name="remember" value="false" title="checkbox"></span>
+    <span>Remember Me</span><span class="right"><input type="checkbox" name="remember" title="checkbox"></span>
     <div class="button-row">
         <button id="register">Register</button>
         <button id="forgot">Forgot</button>
