@@ -3,8 +3,7 @@ import * as $ from "jquery"
 namespace registrationpage {
 
     function do_register() {
-        location.href = "main.html";
-        return false; //block form submit
+        return true; //allow form submit
     }
 
     function do_cancel() {
