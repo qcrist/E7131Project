@@ -58,9 +58,16 @@
 </head>
 <body>
 <form action="/action/login" method="POST">
-    <span>Email</span><input type="text" name="email" placeholder="email">
-    <span>Password</span><input type="password" name="password" placeholder="password">
-    <span>Remember Me</span><span class="right"><input type="checkbox" name="remember" title="checkbox"></span>
+    <span>Email</span>
+    <input type="text" name="email" placeholder="email" required>
+
+    <span>Password</span>
+    <input type="password" name="password" placeholder="password" required>
+
+    <span>Remember Me</span>
+    <span class="right">
+    <input type="checkbox" name="remember" title="checkbox"></span>
+
     <div class="button-row">
         <button id="register">Register</button>
         <button id="forgot">Forgot</button>
