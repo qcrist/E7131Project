@@ -17,14 +17,15 @@ namespace loginpage {
 
         if (!email.match(regex)) {
             alert("Invalid email address.");
+            return false;
         }
 
         else if (password.length < 5) {
             alert("Wrong password.");
+            return false;
         }
 
         else {
-            location.href = "main.html";
             return true; //do form submit
         }
     }
