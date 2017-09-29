@@ -13,9 +13,9 @@
     <link href="css/create_edit_group.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
     <script src="scripts/requireconfig.js"></script>
-    <title>LoginPage</title>
+    <title>New Group Member</title>
     <script>
-        requirejs(["scripts/create_edit_group"]);
+        requirejs(["scripts/new_member"]);
     </script>
     <style>
         body {
@@ -42,29 +42,48 @@
             margin: 0;
         }
 
-        .button-row{
+        .button-row {
             display: grid;
             justify-items: stretch;
             grid-template-columns: 50% 50%;
             grid-gap: 3vmin;
-            width: 15%;
+            width: 100%;
+        }
+
+        .genderSelect {
+            text-align: left;
+            font-weight: normal;
+        }
+
+        input[type="radio"] {
+            -ms-transform: scale(2); /* IE 9 */
+            -webkit-transform: scale(2); /* Chrome, Safari, Opera */
+            transform: scale(2);
+            vertical-align:middle;
         }
     </style>
 </head>
 <body>
-<form action="javascript:history.back()">
-    <span>Name</span><input type="text" name="Name" placeholder="New Member Name Here">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <span>Select image to upload:</span>
-        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-
-        <!--The preceding lines are in the https://www.w3schools.com/php/php_file_upload.asp template
-        for uploading files. They also have the php to go with it. -->
-    </form>
+<top>
+    <span>Add a New Group Member</span>
+</top>
+<form id="addPerson" method = "post" enctype="multipart/form-data">
+    <span>Name:</span>
+    <input type="text" id="userName" name="Name" placeholder="New Member Name Here" required>
+    <span>Gender:</span>
+    <span class="genderSelect">
+        <input type="radio" name="gender" value="false" title="radio" required> Male&nbsp
+        <input type="radio" name="gender" value="false" title="radio"> Female&nbsp
+        <input type="radio" name="gender" value="false" title="radio"> Other
+    </span>
+    <span>Select image to upload:</span>
+    <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" required>
+    <span>&nbsp</span>
     <div class="button-row">
-        <button id="Cancel">Cancel</button>
-        <button id="Add">Add</button>
+        <button id="cancel" type="button">Cancel</button>
+        <button id="add" type="submit">Add</button>
     </div>
 </form>
+
 </body>
 </html>

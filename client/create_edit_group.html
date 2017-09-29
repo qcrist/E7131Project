@@ -50,12 +50,14 @@
             grid-gap: 3vmin;
             width: 100%;
         }
+
     </style>
 </head>
 <body>
-<form action="javascript:history.back()">
-    <span>Group Name</span><input type="text" name="Group Name" placeholder="Your Group Name Here">
-    <span>Add Member</span><input type="text" name="Add Member" placeholder="Member's Name Here">
+
+    <span>Group Name</span><input type="text" name="Group Name" placeholder="Your Group Name">
+    <span>Add Member</span><input type="text" name="Add Member" placeholder="Search Existing Users">
+    <button id="unregistered">Add Unregistered Person</button>
     <span>Current Members</span>
     <div class="vertical-menu" style="overflow-y:scroll;">
         <a href="#">Aragorn</a>
@@ -67,11 +69,12 @@
         <a href="#">Gandalf</a>
         <a href="#">Harry</a>
     </div>
-    <div class="button-row">
-        <button id="Cancel">Cancel</button>
-        <button id="Update">Update</button>
-        <button id="Create">Create</button>
-    </div>
-</form>
+    <form action="javascript:history.back()">
+        <div class="button-row">
+            <button id="Cancel">Cancel</button>
+            <button id="Update">Update</button>
+            <button id="Create">Create</button>
+        </div>
+    </form>
 </body>
 </html>
