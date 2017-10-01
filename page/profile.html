@@ -1,0 +1,38 @@
+<% var user = nodejserver.get_user(req) %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/profile.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
+    <title>Profile</title>
+</head>
+<body>
+<header>
+    <div>
+        <a href="/page/main.html">Back</a>
+    </div>
+    <div>
+        <span>Profile</span>
+    </div>
+</header>
+<content>
+    <top>
+        <div id="groupName">Your Profile</div>
+    </top>
+    <div class="leftColumn">
+        <div id="userpic"><img src="<%= user.photo %>"/></div>
+        <div><%= user.name %></div>
+    </div>
+    <div class="rightColumn">
+        <div><%= user.email %></div>
+        <!--<div>User ID: 1234567890</div>-->
+        <button id="passwordButton" onclick="alert('stretch goal!')">Update Password</button>
+    </div>
+</content>
+</body>
+</html>

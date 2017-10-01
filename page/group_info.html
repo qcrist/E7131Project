@@ -1,0 +1,39 @@
+<%
+var group_id = nodejserver.cookie(req, 'group_id');
+if (!group_id) {
+    res.redirect("/page/main.html");
+}
+var group = nodejserver.db.groups[group_id];
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/css/group_info.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
+    <title>Group Info</title>
+</head>
+<body>
+<header>
+    <div>
+        <a href="/page/main.html">Main</a>
+    </div>
+    <div>
+        <span>
+            <%= group.name %>
+        </span>
+    </div>
+    <div>
+        <a href="/page/create_edit_group.html">Edit</a>
+    </div>
+</header>
+<content>
+    <a href="game_from_image.html">Choose name from faces</a><br>
+    <a href="game_from_name.html">Choose face from names</a>
+</content>
+</body>
+</html>

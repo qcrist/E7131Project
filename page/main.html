@@ -1,0 +1,134 @@
+<% res.clearCookie("group_id"); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/img/icon.png">
+    <link rel="icon" href="/img/icon.png">
+
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
+    <title>MainPage</title>
+    <% var groups = nodejserver.db.groups_for_user(nodejserver.get_user(req)) %>
+    <style>
+
+        .topright {
+            display: block;
+            text-align: right;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topright a {
+            background: #f5faff;
+            border: 1px solid black;
+            padding: 1vmin;
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            text-align: center;
+        }
+
+        content {
+            margin: 3vmin;
+            width: 94vw;
+            height: calc(100vh - 18vmin);
+            display: grid;
+            align-items: stretch;
+            justify-items: center;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(1, auto) 1fr;
+            grid-gap: 3vmin;
+        }
+
+        .wide {
+            grid-column: 1 / 3;
+            width: 100%;
+            text-align: center;
+        }
+
+        .scrollbox {
+            overflow: auto;
+            grid-column: 1 / 3;
+            width: 100%;
+            border: 1px solid black;
+
+            display: grid;
+            align-items: center;
+            justify-items: stretch;
+            grid-template-columns: auto 1fr auto auto;
+            grid-template-rows: repeat(<%= groups.length + 1 %>, auto) 1fr;
+            font-size: .8em;
+        }
+
+        .scrollbox > *:nth-child(odd) {
+            background: whitesmoke;
+        }
+
+        .scrollbox > *:nth-child(even) {
+            background: darkgray;
+        }
+
+        .scrollbox > span, .scrollbox > b {
+            padding: 1vmin;
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <a href="/page/profile.html">Profile</a>
+    </div>
+    <div>
+        <span>
+            Main
+        </span>
+    </div>
+    <div>
+        <a href="/action/logout">Logout</a>
+    </div>
+</header>
+<content>
+    <div class="wide" style="font-weight: bold; position: relative">
+        Your Groups
+        <div class="topright">
+            <a href="/page/create_edit_group.html"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a href="/page/join_group.html" onclick="alert('sprint 4'); return false;"><i class="fa fa-search" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="scrollbox">
+        <b>ID</b><b>Name</b><b>Type</b><b>Edit</b>
+        <% for (var group of groups){ %>
+        <span><%= group.id %></span>
+        <span class="goto" id="<%= group.id %>"><a href="#" id="edit"><%= group.name %></a></span>
+        <span><%= group.ispublic ? "public" : "private" %></span>
+        <span class="edit" id="<%= group.id %>"><a href="#" id="edit">edit</a></span>
+        <% } %>
+    </div>
+</content>
+<script>
+    for (let goto of document.querySelectorAll(".goto")) {
+        goto.onclick = () => {
+            document.cookie = "group_id=" + goto.id + "; path=/";
+            location.href = "/page/group_info.html";
+        }
+    }
+    for (let edit of document.querySelectorAll(".edit")) {
+        edit.onclick = () => {
+            document.cookie = "group_id=" + edit.id + "; path=/";
+            location.href = "/page/create_edit_group.html";
+        }
+    }
+</script>
+</body>
+</html>

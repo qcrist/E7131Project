@@ -1,0 +1,150 @@
+<%
+var group_id = nodejserver.cookie(req, 'group_id');
+if (!group_id) {
+    group_id = nodejserver.db.new_group(nodejserver.get_user(req)).id;
+    nodejserver.set_cookie(res, 'group_id', group_id);
+}
+var group = nodejserver.db.groups[group_id];
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png">
+
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
+    <title>LoginPage</title>
+    <script>
+        requirejs(["create_edit_group"]);
+        window.unchanged = true;
+    </script>
+    <style>
+        content {
+            margin: 3vmin;
+            width: 94vw;
+            height: calc(100vh - 18vmin);
+            display: grid;
+            align-items: stretch;
+            justify-items: center;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: repeat(3, auto) 1fr;
+            grid-gap: 3vmin;
+        }
+
+        .wide {
+            grid-column: 1 / 3;
+            width: 100%;
+            text-align: center;
+        }
+
+        input[name=name], select {
+            width: 100%;
+            text-align: center;
+        }
+
+        .topright {
+            display: block;
+            text-align: right;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topright a {
+            background: #f5faff;
+            border: 1px solid black;
+            padding: 1vmin;
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            text-align: center;
+        }
+
+        .scrollbox {
+            overflow: auto;
+            grid-column: 1 / 3;
+            width: 100%;
+            border: 1px solid black;
+            font-size: 1.5em;
+            padding: 3vmin;
+
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: repeat(<%=group.members.length%>, auto) 1fr;
+            grid-row-gap: 3vmin;
+        }
+
+        .scrollbox > img {
+            max-height: 1em;
+            max-width: 1em;
+        }
+    </style>
+</head>
+<body>
+<form action="/action/updategroup" method="post">
+    <header>
+        <div>
+            <a href="/page/group_info.html">Done</a>
+        </div>
+        <div>
+            <span>Group Editor</span>
+        </div>
+        <div>
+            <button>Save</button>
+        </div>
+    </header>
+    <content>
+        Name<input type="text" name="name" placeholder="Group Name" required value="<%= group.name %>" oninput="return window.unchanged = false">
+        Type<select name="ispublic" oninput="return window.unchanged = false">
+            <option value="false" <%= !group.ispublic ? "selected" : "" %> >Private</option>
+            <option value="true" <%= group.ispublic ? "selected" : "" %> >Public</option>
+        </select>
+
+        <div class="wide" style="font-weight: bold; position: relative">
+            Members
+            <div class="topright">
+                <a href="/page/add_user_to_group.html" id="add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="scrollbox">
+            <% for (var member of group.members) { %>
+            <img src="<%= member.photo %>"/>
+            <span><%= member.name %></span>
+            <% } %>
+        </div>
+    </content>
+    <script>
+        document.querySelector("#add").onclick = function () {
+            if (!window.unchanged && !confirm("If you don't save changes first, you will lose them, continue?"))
+                return false;
+        }
+    </script>
+    <!--<span>Group Name</span>-->
+    <!--<span>Add Member</span><input type="text" name="Add Member" placeholder="Search Existing Users">-->
+    <!--<button id="unregistered">Add Unregistered Person</button>-->
+    <!--<span>Current Members</span>-->
+    <!--<div class="vertical-menu" style="overflow-y:scroll;">-->
+    <!--<a href="#">Aragorn</a>-->
+    <!--<a href="#">Bilbo</a>-->
+    <!--<a href="#">Celine</a>-->
+    <!--<a href="#">Daenerys</a>-->
+    <!--<a href="#">Eragon</a>-->
+    <!--<a href="#">Farquaad</a>-->
+    <!--<a href="#">Gandalf</a>-->
+    <!--<a href="#">Harry</a>-->
+    </div>
+</form>
+</body>
+</html>
