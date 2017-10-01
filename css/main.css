@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+}
+
+body, input {
+    font-size: 5vmin;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    background: #446cff;
+    border-bottom: 1px outset black;
+    justify-items: stretch;
+    align-items: center;
+    padding: 1vmin;
+    height: 12vmin;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+header > div a, header > div button {
+    background: #f5faff;
+    border: 1px solid black;
+    font-size: 5vmin;
+    padding: 1vmin;
+}
+
+header > div > span {
+    font-size: 5vmin;
+    padding: 1vmin;
+}
+
+header > * {
+    padding: 1vmin;
+}
+
+header > *:nth-child(2) {
+    text-align: center;
+}
+
+header > *:nth-child(3) {
+    text-align: right;
+}
+
+.group-button {
+    display: inline;
+}
+
+#logout {
+    text-align: right;
+}

@@ -3,10 +3,12 @@
     "module": "amd",
     "target": "es5",
     "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "sourceMap": false,
     "inlineSourceMap": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "server"
   ]
 }

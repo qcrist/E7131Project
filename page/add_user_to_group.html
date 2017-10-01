@@ -7,18 +7,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="img/icon.png">
-    <link rel="icon" href="img/icon.png">
+    <link rel="apple-touch-icon" href="/img/icon.png">
+    <link rel="icon" href="/img/icon.png">
 
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-    <script src="scripts/requireconfig.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
     <title>Registration Page</title>
     <script>
-        requirejs(["scripts/registration"]);
+        requirejs(["add_user"]);
     </script>
     <style>
         body {
+            border: 10px solid transparent;
             display: grid;
             justify-items: center;
             align-items: center;
@@ -47,7 +48,8 @@
         }
 
         input[type=file] {
-            display: none;
+            /*display: none;*/
+            grid-column: 1 / 3;
         }
 
         .button-row {
@@ -58,41 +60,44 @@
             grid-gap: 3vmin;
             width: 100%;
         }
+
+        img {
+            max-width: 80vw;
+            max-height: 100%;
+        }
     </style>
 </head>
 <body>
-  <form action="/action/register" method="POST">
+<img id=photo src="/img/icon.png">
+<form action="/action/add_user_to_group" method="POST" name="registrationForm" enctype="multipart/form-data">
     <span>Name</span>
-    <input type="text" name="name" placeholder="First and Last Name">
+    <input type="text" name="name" placeholder="Full Name" required>
 
     <span>Gender</span>
     <span class="right">
-        Male <input type="checkbox" name="male" value="false" title="checkbox">
-        Female <input type="checkbox" name="female" value="false" title="checkbox">
+        Male <input type="radio" name="gender" value="m" title="checkbox">
+        Female <input type="radio" name="gender" value="f" title="checkbox">
     </span>
 
-    <span>Email</span>
-    <input type="text" name="email" placeholder="someone@example.com">
-
-    <span>Password</span>
-    <input type="password" name="password" placeholder="Password">
-
-    <span>Confirm Password</span>
-    <input type="password" name="confirmpassword" placeholder="Re-enter Password">
-
-    <span>Upload Photo</span>
-    <input type="file" name="photo" id="uploadme" accept="image/*">
-    <span class="right"><input type="button" id="uploadphoto" value="Upload a photo!"/></span>
+    <input type="file" name="photo" accept="image/*" style="display: none" required>
 
     <div class="button-row">
-        <button id="cancel">Cancel</button>
+        <button id="cancel" onclick="history.go(-1)">Cancel</button>
         <button id="submit">Submit</button>
     </div>
 
     <script>
-        document.querySelector("#uploadphoto").onclick = function () {
-            document.querySelector("#uploadme").click();
+        document.querySelector("#photo").onclick = function () {
+            document.querySelector("input[name=photo]").click();
         }
+        document.querySelector("input[name=photo]").onchange = function () {
+            let reader = new FileReader();
+            console.log(this);
+            reader.onload = (e) => {
+                document.querySelector("#photo").src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        };
     </script>
 </form>
 </body>

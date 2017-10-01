@@ -7,21 +7,26 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="img/icon.png">
-    <link rel="icon" href="img/icon.png">
+    <link rel="apple-touch-icon" href="/img/icon.png">
+    <link rel="icon" href="/img/icon.png">
 
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-    <script src="scripts/requireconfig.js"></script>
+    <script src="/scripts/requireconfig.js"></script>
     <title>LoginPage</title>
     <script>
-        requirejs(["scripts/login"]);
+        requirejs(["login"]);
     </script>
     <style>
         body {
             display: grid;
             justify-items: center;
             align-items: center;
+        }
+
+        input[type=text], input[type=password] {
+            border: none;
+            border-bottom: 1px solid black;
         }
 
         body > form {
@@ -39,11 +44,6 @@
         input, .right {
             text-align: right;
             margin: 0;
-        }
-
-        input[type=text], input[type=password] {
-            border: none;
-            border-bottom: 1px solid black;
         }
 
         .button-row {
