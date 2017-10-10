@@ -20,25 +20,29 @@ export namespace nodejserver {
     ];
 
     export const db = new database.Database();
-    let debug_user_email = "debug_user@gmail.com";
-    let debug_user = db.add_user({
-        name: "debug user",
-        gender: "",
-        email: debug_user_email,
-        passwd: debug_user_email,
-        photo: "/img/image.png"
-    });
-    let debug_group = db.new_group(debug_user);
-    debug_group.owner = debug_user.id;
-    debug_group.name = "DEBUG GROUP";
-    debug_group.ispublic = false;
-    db.add_user_to_group(debug_group.id, debug_user);
 
-    let debug_group2 = db.new_group(debug_user);
-    debug_group2.owner = debug_user.id;
-    debug_group2.name = "DEBUG PUBLIC GROUP";
-    debug_group2.ispublic = true;
-    db.add_user_to_group(debug_group2.id, debug_user);
+    let debug_user_email = "debug_user@gmail.com";
+    db.load();
+    if (!db.users[debug_user_email]) {
+        let debug_user = db.add_user({
+            name: "debug user",
+            gender: "",
+            email: debug_user_email,
+            passwd: debug_user_email,
+            photo: "/img/image.png"
+        });
+        let debug_group = db.new_group(debug_user);
+        debug_group.owner = debug_user.id;
+        debug_group.name = "DEBUG GROUP";
+        debug_group.ispublic = false;
+        db.add_user_to_group(debug_group.id, debug_user);
+
+        let debug_group2 = db.new_group(debug_user);
+        debug_group2.owner = debug_user.id;
+        debug_group2.name = "DEBUG PUBLIC GROUP";
+        debug_group2.ispublic = true;
+        db.add_user_to_group(debug_group2.id, debug_user);
+    }
 
     // let debug_group = data
     function handle_login(req: express.Request, res: express.Response, next: () => void) {

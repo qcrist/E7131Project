@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 export interface group {
     id: number,
     name: string,
@@ -22,6 +24,8 @@ export interface user {
     photo: string,
     id: number
 }
+
+const DATABASE_SAVE_PATH = "data.json";
 
 export class Database {
     group_count = 0;
@@ -53,18 +57,21 @@ export class Database {
         };
         this.users[user.id] = user;
         this.users[user.email] = user;
+        this.save();
         return user;
     }
 
     new_group(owner: user) {
         let id = this.group_count++;
-        return this.groups[id] = <group> {
+        let result = this.groups[id] = <group> {
             id: id,
             name: "",
             owner: owner.id,
             members: [],
             ispublic: true,
         };
+        this.save();
+        return result;
     }
 
     groups_for_user(info: user) {
@@ -75,6 +82,7 @@ export class Database {
                 groups.push(group);
             }
         }
+        this.save();
         return groups;
     }
 
@@ -84,5 +92,24 @@ export class Database {
                 return;
         }
         this.groups[id].members.push(user);
+        this.save();
+    }
+
+    save() {
+        let fd = fs.openSync(DATABASE_SAVE_PATH, "w");
+        fs.writeSync(fd, JSON.stringify(this));
+        fs.closeSync(fd);
+    }
+
+    load() {
+        try {
+            let data = fs.readFileSync(DATABASE_SAVE_PATH).toString();
+            let json = JSON.parse(data);
+            for (let key of Object.keys(json)) {
+                this[key] = json[key];
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
