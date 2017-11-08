@@ -81,7 +81,7 @@ var group = nodejserver.db.groups[group_id];
             display: grid;
             align-items: center;
             justify-items: center;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: auto 1fr auto;
             grid-template-rows: repeat(<%=group.members.length%>, auto) 1fr;
             grid-row-gap: 3vmin;
         }
@@ -90,6 +90,17 @@ var group = nodejserver.db.groups[group_id];
             max-height: 1em;
             max-width: 1em;
         }
+
+        .remove_member {
+            background: #f5faff;
+            border: 1px solid black;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            text-align: center;
+            font-size: 0.9em
+        }
+
     </style>
 </head>
 <body>
@@ -102,12 +113,12 @@ var group = nodejserver.db.groups[group_id];
             <span>Group Editor</span>
         </div>
         <div>
-            <button>Save</button>
+            <button id="save">Save</button>
         </div>
     </header>
     <content>
         Name<input type="text" name="name" placeholder="Group Name" required value="<%= group.name %>" oninput="return window.unchanged = false">
-        Type<select name="ispublic" oninput="return window.unchanged = false">
+        Type<select class="fa" name="ispublic" oninput="return window.unchanged = false">
             <option value="false" <%= !group.ispublic ? "selected" : "" %> >Private</option>
             <option value="true" <%= group.ispublic ? "selected" : "" %> >Public</option>
         </select>
@@ -122,6 +133,7 @@ var group = nodejserver.db.groups[group_id];
             <% for (var member of group.members) { %>
             <img src="<%= member.photo %>"/>
             <span><%= member.name %></span>
+            <button type="button" class="fa fa-minus remove_member"></button>
             <% } %>
         </div>
     </content>

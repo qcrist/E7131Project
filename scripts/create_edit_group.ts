@@ -1,6 +1,6 @@
 import * as $ from "jquery"
 
-$("button").click(() => {
+$("#save").click(() => {
     if (!$("[name=name]").val()) {
         alert("please enter a name");
         return false;
