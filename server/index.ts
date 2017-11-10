@@ -104,6 +104,16 @@ export namespace nodejserver {
         res.redirect("/page/create_edit_group.html");
     }
 
+    function handle_remove_user_from_group(req: express.Request, res: express.Response, next: () => void) {
+        let group_id = nodejserver.cookie(req, 'group_id');
+        if (!group_id) {
+            return res.status(400).send("no group set, cookie timeout?");
+        }
+        let user_id = req.body.id;
+        db.remove_user_from_group(group_id, user_id);
+    }
+
+
     function is_valid_login(req: express.Request) {
         return !!db.users[cookie(req, "user")];
     }
@@ -135,6 +145,7 @@ export namespace nodejserver {
     app.post("/action/register", post.single("photo"), handle_register);
     app.post("/action/updategroup", post.fields([]), handle_updategroup);
     app.post("/action/add_user_to_group", post.single("photo"), handle_add_user_to_group);
+    app.post("/action/remove_user_from_group", post.single("id"), handle_remove_user_from_group);
 
     app.use("/page/", (req, res) => {
         let path = parseurl.original(req).pathname.replace(/(^\/)/g, "");

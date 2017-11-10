@@ -95,6 +95,19 @@ export class Database {
         this.save();
     }
 
+    remove_user_from_group(group_id: number, user_id: number) {
+        let my_group = this.groups[group_id].members;
+        let i:any;
+        for (i in my_group) {
+            if (my_group[i].id == user_id) {
+                this.groups[group_id].members.splice(i, 1);
+                this.save();
+                return;
+            }
+        }
+
+    }
+
     save() {
         let fd = fs.openSync(DATABASE_SAVE_PATH, "w");
         fs.writeSync(fd, JSON.stringify(this));

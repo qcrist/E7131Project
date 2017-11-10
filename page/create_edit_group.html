@@ -134,6 +134,7 @@ var group = nodejserver.db.groups[group_id];
             <img src="<%= member.photo %>"/>
             <span><%= member.name %></span>
             <button type="button" class="fa fa-minus remove_member"></button>
+            <span hidden><%= member.id %></span>
             <% } %>
         </div>
     </content>
