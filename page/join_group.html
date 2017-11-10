@@ -30,14 +30,15 @@
     </style>
 </head>
 <body>
-    <form action="main.html">
+    <form action="/action/join_group" method="POST" name="joinForm" enctype="multipart/form-data">
         <fieldset>
             <legend>Join a Group</legend>
             <p>
                 <label>Search for a group:</label>
                 <input type = "text"
-                       id = "groupname"
-                       placeholder = "Group Name"/>
+                       name = "groupName"
+                       placeholder = "Group Name"
+                       required>
                 <button class="button" id="search">Search</button>
                 <button class="button" id="cancel">Cancel</button>
             </p>

@@ -110,7 +110,10 @@ var group = nodejserver.db.groups[group_id];
             <a href="/page/group_info.html">Done</a>
         </div>
         <div>
-            <span>Group Editor</span>
+            <span>
+                Group Editor - Group ID:
+                <%= group.id %>
+            </span>
         </div>
         <div>
             <button id="save">Save</button>

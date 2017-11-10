@@ -3,8 +3,8 @@ import * as $ from "jquery"
 namespace loginpage {
 
     function do_login() {
-        let email : string = (<HTMLInputElement>document.getElementById("email")).value;
-        let password : string = (<HTMLInputElement>document.getElementById("password")).value;
+        let email = document.forms["loginForm"]["email"].value;
+        let password = document.forms["loginForm"]["password"].value;
 
         /**
          * There is an official standard for valid email addresses known as RFC 2822
@@ -15,19 +15,25 @@ namespace loginpage {
          **/
         let regex : string = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
-        if (!email.match(regex)) {
-            alert("Invalid email address.");
+        let failed = false;
+        let alertMessage = "Login Failed. Please fix the following: ";
+
+        if (email == "" || !email.match(regex)) {
+            failed = true;
+            alertMessage += "\n **Please enter a valid email address";
+        }
+
+        if (password == "" || password.length < 5) {
+            failed = true;
+            alertMessage += "\n **Please fix password. Has to be more than five characters.";
+        }
+
+        if (failed) {
+            alert(alertMessage);
             return false;
         }
 
-        else if (password.length < 5) {
-            alert("Wrong password.");
-            return false;
-        }
-
-        else {
-            return true; //do form submit
-        }
+        return true;
     }
 
     function do_register() {
