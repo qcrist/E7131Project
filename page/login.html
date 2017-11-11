@@ -22,17 +22,24 @@
             display: grid;
             justify-items: center;
             align-items: center;
+            height: 100vh;
+            background: #C6FFC6;
+            color: #007676;
         }
 
         input[type=text], input[type=password] {
             border: none;
             border-bottom: 1px solid black;
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+            background-color: #F6FFF6;
         }
 
         body > form {
             display: grid;
             align-items: center;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 100%;
             grid-gap: 2vmin;
             width: 80vw;
         }
@@ -41,8 +48,8 @@
             font-weight: bold;
         }
 
-        input, .right {
-            text-align: right;
+        input, .center {
+            text-align: center;
             margin: 0;
         }
 
@@ -54,19 +61,24 @@
             grid-gap: 3vmin;
             width: 100%;
         }
+        button {
+            background-color: #007676;
+            color: #F6FFF6;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
-<form action="/action/login" method="POST" name="loginForm" enctype="multipart/form-data">
-    <span>Email</span>
-    <input type="text" name="email" placeholder="email" required>
+<form action="/action/login" method="POST" name="loginForm" enctype="multipart/form-data" class = "center">
+    <span>Let's Face It</span><br>
+    <input type="text" name="email" placeholder="email" required><br>
 
-    <span>Password</span>
-    <input type="password" name="password" placeholder="password" required>
+    <!--<span>Password</span><br>-->
+    <input type="password" name="password" placeholder="password" required><br>
 
-    <span>Remember Me</span>
-    <span class="right">
-    <input type="checkbox" name="remember" title="checkbox"></span>
+    <span>Remember Me
+    <!--<span class="center">-->
+    <input type="checkbox" name="remember" title="checkbox"></span></span>
 
     <div class="button-row">
         <button id="register">Register</button>

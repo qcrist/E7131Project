@@ -7,6 +7,8 @@ body {
     width: 100vw;
     overflow: hidden;
     margin: 0;
+    background: #C6FFC6;
+    color: #007676;
 }
 
 body, input {
@@ -16,7 +18,8 @@ body, input {
 header {
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    background: #446cff;
+    background: #007676;
+    color: #F6FFF6;
     border-bottom: 1px outset black;
     justify-items: stretch;
     align-items: center;
@@ -53,6 +56,11 @@ header > *:nth-child(3) {
     text-align: right;
 }
 
+button {
+    background-color: #007676;
+    color: #F6FFF6;
+    border-radius: 12px;
+}
 .group-button {
     display: inline;
 }
