@@ -56,11 +56,6 @@ header > *:nth-child(3) {
     text-align: right;
 }
 
-button {
-    background-color: #007676;
-    color: #F6FFF6;
-    border-radius: 12px;
-}
 .group-button {
     display: inline;
 }

@@ -67,23 +67,18 @@ var group = nodejserver.db.groups[group_id];
 <content>
     <%
     //choose a random member
-    var x = group.members[Math.floor(Math.random() * group.members.length)];
-
+    var x = nodejserver.db.users[group.members[Math.floor(Math.random() * group.members.length)]];
     // make a list of options
-    var ids = group.members.map(mem => mem.id);
-
+    var ids = group.members.map(mem => mem);
     //limit to 8 options
     while (ids.length > 8) {
         //choose a random member
         var index = Math.floor(Math.random() * group.members.length);
-
         //don't remove the correct choice
-        if (group.members[index].id == x.id) continue;
-
+        if (group.members[index] == x.id) continue;
         //remove it
         ids.splice(index, 1);
     }
-
     // shuffle them
     nodejserver.shuffle(ids);
     %>
@@ -92,7 +87,7 @@ var group = nodejserver.db.groups[group_id];
 
     <% for (var i = 0; i < ids.length ; i++) { %>
         <% var user = nodejserver.db.users[ids[i]] %>
-        <choice correct="<%= user.id == x.id %>"><img src="<%= user.photo %>"></img></choice>
+        <choice correct="<%= user.id == x.id %>"><img src="<%= user.photo %>"/></choice>
     <% } %>
 </content>
 </body>

@@ -3,7 +3,7 @@ import * as fs from "fs";
 export interface group {
     id: number,
     name: string,
-    members: user[],
+    members: number[],
     owner: number,
     ispublic: boolean
 }
@@ -28,41 +28,39 @@ export interface user {
 const DATABASE_SAVE_PATH = "data.json";
 
 export class Database {
-    group_count = 0;
-    user_count = 0;
+    count = 0;
     users = {} as {
-        [email: string]: user,
         [id: number]: user,
     };
     groups = {} as {
         [id: number]: group
     };
 
-    constructor() {
-        this.group_count = 0;
-        this.user_count = 0;
+    user_from_email(email: string) {
+        for (let uid of Object.keys(this.users)) {
+            if (this.users[uid].email.toLowerCase() == email.toLowerCase())
+                return this.users[uid];
+        }
     }
 
     add_user(info: newuser) {
-        if (this.users[info.email]) {
+        if (this.user_from_email(info.email))
             throw "user with email already exists";
-        }
         let user: user = {
             name: info.name,
             gender: info.gender,
             email: info.email,
             passwd: info.passwd,
             photo: info.photo,
-            id: this.user_count++
+            id: this.count++
         };
         this.users[user.id] = user;
-        this.users[user.email] = user;
         this.save();
         return user;
     }
 
     new_group(owner: user) {
-        let id = this.group_count++;
+        let id = this.count++;
         let result = this.groups[id] = <group> {
             id: id,
             name: "",
@@ -78,7 +76,7 @@ export class Database {
         let groups = [] as group[];
         for (let groupid of Object.keys(this.groups)) {
             let group = this.groups[groupid];
-            if (group.members.indexOf(info) !== -1) {
+            if (group.members.indexOf(info.id) !== -1) {
                 groups.push(group);
             }
         }
@@ -88,18 +86,18 @@ export class Database {
 
     add_user_to_group(id: number, user: user) {
         for (let member of this.groups[id].members) {
-            if (member.id == user.id)
+            if (member == user.id)
                 return;
         }
-        this.groups[id].members.push(user);
+        this.groups[id].members.push(user.id);
         this.save();
     }
 
     remove_user_from_group(group_id: number, user_id: number) {
         let my_group = this.groups[group_id].members;
-        let i:any;
+        let i: any;
         for (i in my_group) {
-            if (my_group[i].id == user_id) {
+            if (my_group[i] == user_id) {
                 this.groups[group_id].members.splice(i, 1);
                 this.save();
                 return;
@@ -121,8 +119,9 @@ export class Database {
             for (let key of Object.keys(json)) {
                 this[key] = json[key];
             }
+            global["data"] = json;
         } catch (err) {
-            console.log(err);
+            console.log(err.message);
         }
     }
 }
