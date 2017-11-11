@@ -103,7 +103,7 @@
         Your Groups
         <div class="topright">
             <a href="/page/create_edit_group.html"><i class="fa fa-plus" aria-hidden="true"></i></a>
-            <a href="/page/join_group.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <a href="#" id="joingroup"><i class="fa fa-search" aria-hidden="true"></i></a>
         </div>
     </div>
     <div class="scrollbox">
@@ -129,6 +129,14 @@
             location.href = "/page/create_edit_group.html";
         }
     }
+    document.querySelector("#joingroup").addEventListener("click", (e) => {
+        let gid = prompt("group id to join");
+        let patt = /^[0-9]+$/;
+        if (!gid.match(patt))
+            alert("not a valid group id");
+        else
+            location.href = `/action/join_group/${gid}`;
+    });
 </script>
 </body>
 </html>

@@ -60,7 +60,7 @@ var group = nodejserver.db.groups[group_id];
             top: 0;
         }
 
-        .topright a {
+        .topright a, .remove_member {
             background: #f5faff;
             border: 1px solid black;
             padding: 1vmin;
@@ -90,17 +90,6 @@ var group = nodejserver.db.groups[group_id];
             max-height: 1em;
             max-width: 1em;
         }
-
-        .remove_member {
-            background: #f5faff;
-            border: 1px solid black;
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            text-align: center;
-            font-size: 0.9em
-        }
-
     </style>
 </head>
 <body>
@@ -111,17 +100,20 @@ var group = nodejserver.db.groups[group_id];
         </div>
         <div>
             <span>
-                Group Editor - Group ID:
-                <%= group.id %>
+                <% if (group.ispublic) { %>
+                Group Editor - Group ID: <%= group.id %>
+                <% }else{ %>
+                Group Editor
+                <% } %>
             </span>
         </div>
         <div>
-            <button id="save">Save</button>
+            <a href="#" id="save">Save</a>
         </div>
     </header>
     <content>
         Name<input type="text" name="name" placeholder="Group Name" required value="<%= group.name %>" oninput="return window.unchanged = false">
-        Type<select class="fa" name="ispublic" oninput="return window.unchanged = false">
+        Type<select class="fa" name="ispublic" oninput="return window.unchanged = false" title="">
             <option value="false" <%= !group.ispublic ? "selected" : "" %> >Private</option>
             <option value="true" <%= group.ispublic ? "selected" : "" %> >Public</option>
         </select>
@@ -133,10 +125,15 @@ var group = nodejserver.db.groups[group_id];
             </div>
         </div>
         <div class="scrollbox">
-            <% for (var member of group.members) { %>
+            <% for (var uid of group.members) { %>
+            <% let member = nodejserver.db.users[uid] %>
             <img src="<%= member.photo %>"/>
             <span><%= member.name %></span>
-            <button type="button" class="fa fa-minus remove_member"></button>
+            <% if (group.owner !== member.id){ %>
+            <button type="button" class="remove_member"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <% }else{ %>
+            <i></i>
+            <% } %>
             <span hidden><%= member.id %></span>
             <% } %>
         </div>
@@ -147,19 +144,6 @@ var group = nodejserver.db.groups[group_id];
                 return false;
         }
     </script>
-    <!--<span>Group Name</span>-->
-    <!--<span>Add Member</span><input type="text" name="Add Member" placeholder="Search Existing Users">-->
-    <!--<button id="unregistered">Add Unregistered Person</button>-->
-    <!--<span>Current Members</span>-->
-    <!--<div class="vertical-menu" style="overflow-y:scroll;">-->
-    <!--<a href="#">Aragorn</a>-->
-    <!--<a href="#">Bilbo</a>-->
-    <!--<a href="#">Celine</a>-->
-    <!--<a href="#">Daenerys</a>-->
-    <!--<a href="#">Eragon</a>-->
-    <!--<a href="#">Farquaad</a>-->
-    <!--<a href="#">Gandalf</a>-->
-    <!--<a href="#">Harry</a>-->
     </div>
 </form>
 </body>

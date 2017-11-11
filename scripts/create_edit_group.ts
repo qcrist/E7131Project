@@ -4,10 +4,12 @@ $("#save").click(() => {
     if (!$("[name=name]").val()) {
         alert("please enter a name");
         return false;
+    } else {
+        return document.querySelector('form').submit(), false;
     }
 });
 
-$(".remove_member").click(function() {
+$(".remove_member").click(function () {
     if (confirm("Remove " + $(this).prev().text() + " from your group?")) {
         $(this).hide();
         $(this).prev().hide();
@@ -16,6 +18,6 @@ $(".remove_member").click(function() {
     }
 });
 
-let submit_removal = function(user_id: string) {
+let submit_removal = function (user_id: string) {
     $.post("/action/remove_user_from_group", {id: user_id})
 }

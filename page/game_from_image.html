@@ -62,15 +62,15 @@ var group = nodejserver.db.groups[group_id];
 <content>
     <%
     //choose a random member
-    var x = group.members[Math.floor(Math.random() * group.members.length)];
+    var x = nodejserver.db.users[group.members[Math.floor(Math.random() * group.members.length)]];
     // make a list of options
-    var ids = group.members.map(mem => mem.id);
+    var ids = group.members.map(mem => mem);
     //limit to 8 options
     while (ids.length > 8) {
         //choose a random member
         var index = Math.floor(Math.random() * group.members.length);
         //don't remove the correct choice
-        if (group.members[index].id == x.id) continue;
+        if (group.members[index] == x.id) continue;
         //remove it
         ids.splice(index, 1);
     }

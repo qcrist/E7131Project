@@ -23,7 +23,7 @@ export namespace nodejserver {
 
     let debug_user_email = "debug_user@gmail.com";
     db.load();
-    if (!db.users[debug_user_email]) {
+    if (!db.user_from_email(debug_user_email)) {
         let debug_user = db.add_user({
             name: "debug user",
             gender: "",
@@ -48,10 +48,11 @@ export namespace nodejserver {
     function handle_login(req: express.Request, res: express.Response, next: () => void) {
         let email = req.body["email"];
         let pass = req.body["password"];
-        if (!db.users[email] || db.users[email].passwd != pass) {
+        let user = db.user_from_email(email);
+        if (!user || user.passwd != pass) {
             return res.status(400).send("invalid user");
         }
-        set_cookie(res, "user", email);
+        set_cookie(res, "user", user.id + "");
         res.redirect("/page/main.html");
     }
 
@@ -76,6 +77,12 @@ export namespace nodejserver {
         }
     }
 
+    function handle_join_group(req: express.Request, res: express.Response, next: () => void) {
+        let gid = +req.params["gid"];
+        db.add_user_to_group(gid, get_user(req));
+        res.redirect("/page/main.html");
+    }
+
     function handle_updategroup(req: express.Request, res: express.Response, next: () => void) {
         let group_id = nodejserver.cookie(req, 'group_id');
         if (!group_id) {
@@ -85,6 +92,7 @@ export namespace nodejserver {
         let group = db.groups[group_id];
         group.name = req.body.name;
         group.ispublic = req.body.ispublic == "true";
+        db.save();
         res.redirect("/page/create_edit_group.html");
     }
 
@@ -146,6 +154,7 @@ export namespace nodejserver {
     app.post("/action/updategroup", post.fields([]), handle_updategroup);
     app.post("/action/add_user_to_group", post.single("photo"), handle_add_user_to_group);
     app.post("/action/remove_user_from_group", post.single("id"), handle_remove_user_from_group);
+    app.get("/action/join_group/:gid", handle_join_group);
 
     app.use("/page/", (req, res) => {
         let path = parseurl.original(req).pathname.replace(/(^\/)/g, "");
