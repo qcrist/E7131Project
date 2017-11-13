@@ -121,6 +121,13 @@ export namespace nodejserver {
         db.remove_user_from_group(group_id, user_id);
     }
 
+    function handle_remove_self_from_group(req: express.Request, res: express.Response, next: () => void) {
+        let user_id = req.body.user_id;
+        let group_id = req.body.group_id;
+
+        db.remove_user_from_group(group_id, user_id);
+    }
+
 
     function is_valid_login(req: express.Request) {
         return !!db.users[cookie(req, "user")];
@@ -154,6 +161,8 @@ export namespace nodejserver {
     app.post("/action/updategroup", post.fields([]), handle_updategroup);
     app.post("/action/add_user_to_group", post.single("photo"), handle_add_user_to_group);
     app.post("/action/remove_user_from_group", post.single("id"), handle_remove_user_from_group);
+    app.post("/action/remove_self_from_group", post.fields([]), handle_remove_self_from_group);
+
     app.get("/action/join_group/:gid", handle_join_group);
 
     app.use("/page/", (req, res) => {

@@ -29,9 +29,18 @@ var group = nodejserver.db.groups[group_id];
             <%= group.id %>
         </span>
     </div>
+    <% var user = nodejserver.get_user(req); %>
+    <% if (group.owner == user.id) {%>
     <div>
         <a href="/page/create_edit_group.html">Edit</a>
     </div>
+    <%} else {%>
+    <div>
+        <a href="#" style="background-color:red">Leave Group</a>
+    </div>
+    <%} %>
+
+    
 </header>
 <content>
     <a href="game_from_image.html">Choose name from faces</a><br>

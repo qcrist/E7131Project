@@ -17,6 +17,7 @@
     <script src="/scripts/common.js"></script>
     <title>MainPage</title>
     <% var groups = nodejserver.db.groups_for_user(nodejserver.get_user(req)) %>
+    <% var user = nodejserver.get_user(req); %>
     <style>
 
         .topright {
@@ -112,7 +113,11 @@
         <span><%= group.id %></span>
         <span class="goto" id="<%= group.id %>"><a href="#" id="edit"><%= group.name %></a></span>
         <span><%= group.ispublic ? "public" : "private" %></span>
+        <% if (group.owner == user.id) {%>
         <span class="edit" id="<%= group.id %>"><a href="#" id="edit">edit</a></span>
+        <%} else {%>
+        <span class="leave" id="<%= group.id %>" style="background-color:red"><a href="#" id="edit">leave</a></span>
+        <%} %>
         <% } %>
     </div>
 </content>
@@ -129,6 +134,17 @@
             location.href = "/page/create_edit_group.html";
         }
     }
+
+    for (let leave of document.querySelectorAll(".leave")) {
+        leave.onclick = () => {
+            console.log("Leave button TODO!!");
+
+            /**
+            $.post("/action/remove_self_from_group", {user_id: user.id, group_id: leave.id});
+            location.href = "/page/main.html";**/
+        }
+    }
+
     document.querySelector("#joingroup").addEventListener("click", (e) => {
         let gid = prompt("group id to join");
         let patt = /^[0-9]+$/;
