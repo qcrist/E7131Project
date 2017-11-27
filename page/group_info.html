@@ -17,7 +17,21 @@ var group = nodejserver.db.groups[group_id];
     <script src="/scripts/common.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Group Info</title>
+    <style>
+        .game_button {
+            background: #f5faff;
+            padding: 3vmin;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 1vmin;
+            display: inline-block;
+
+
+        }
+    </style>
 </head>
+
+
 <body>
 <header>
     <div>
@@ -43,9 +57,13 @@ var group = nodejserver.db.groups[group_id];
 
     
 </header>
-<content>
-    <a href="game_from_image.html">Choose name from faces</a><br>
-    <a href="game_from_name.html">Choose face from names</a>
+<content style="width:100%; text-align:center;">
+    <br><div>Select a Quiz</div><br>
+    <div>
+        <a class="game_button" href="game_from_image.html">Choose name from faces</a><br>
+        <a class="game_button" href="game_from_name.html">Choose face from names</a>
+    </div>
+
 </content>
 <script type="text/javascript">
     
