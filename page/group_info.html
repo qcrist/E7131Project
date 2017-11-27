@@ -15,6 +15,7 @@ var group = nodejserver.db.groups[group_id];
     <link href="/css/main.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
     <script src="/scripts/common.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Group Info</title>
 </head>
 <body>
@@ -36,7 +37,7 @@ var group = nodejserver.db.groups[group_id];
     </div>
     <%} else {%>
     <div>
-        <a href="#" style="background-color:red">Leave Group</a>
+        <a href="#" style="background-color:red" id="leave">Leave</a>
     </div>
     <%} %>
 
@@ -46,5 +47,16 @@ var group = nodejserver.db.groups[group_id];
     <a href="game_from_image.html">Choose name from faces</a><br>
     <a href="game_from_name.html">Choose face from names</a>
 </content>
+<script type="text/javascript">
+    
+    for (let leave of document.querySelectorAll("#leave")) {
+        leave.onclick = function() {
+            $.post("/action/remove_self_from_group", {user_id: <%=user.id%>, group_id: <%=group.id%>}, function(){
+                location.href = "/page/ma in.html";
+            });
+        }
+    }
+</script>
 </body>
 </html>
+
