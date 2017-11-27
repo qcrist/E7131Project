@@ -14,3 +14,10 @@ window.addEventListener("load", () => {
         });
     });
 });
+
+for (let leave of document.querySelectorAll(".leave")) {
+    leave.onclick = () => {
+        $.post("/action/remove_self_from_group", {user_id: user.id, group_id: leave.id});
+        location.href = "/page/main.html";
+    }
+}

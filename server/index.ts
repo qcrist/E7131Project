@@ -119,6 +119,7 @@ export namespace nodejserver {
         }
         let user_id = req.body.id;
         db.remove_user_from_group(group_id, user_id);
+        res.send("Success");
     }
 
     function handle_remove_self_from_group(req: express.Request, res: express.Response, next: () => void) {
@@ -126,6 +127,7 @@ export namespace nodejserver {
         let group_id = req.body.group_id;
 
         db.remove_user_from_group(group_id, user_id);
+        res.send("Success");
     }
 
 
