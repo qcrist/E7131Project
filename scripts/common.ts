@@ -5,15 +5,15 @@ requirejs.config({
     }
 });
 
-window.addEventListener("load", () => {
-    document.querySelectorAll("a:not([target])").forEach((a: HTMLAnchorElement, i) => {
-        a.setAttribute("prevent_and_redirect", "");
-        a.addEventListener("click", (e) => {
-            e.preventDefault();
-            location.href = a.href;
-        });
-    });
-});
+// window.addEventListener("load", () => {
+//     document.querySelectorAll("a:not([target])").forEach((a: HTMLAnchorElement, i) => {
+//         a.setAttribute("prevent_and_redirect", "");
+//         a.addEventListener("click", (e) => {
+//             e.preventDefault();
+//             location.href = a.href;
+//         });
+//     });
+// });
 
 for (let leave of document.querySelectorAll(".leave")) {
     leave.onclick = () => {
