@@ -1,6 +1,6 @@
-# E7131Project
+# Let's Face It Version 1.0
 
-### Release Notes: Let’s Face It Version 1.0 
+### Release Notes: Version 1.0 
 ##### New Features
 * Added ability to register as a new user and login
 * Added ability to create groups
@@ -24,7 +24,7 @@
 
 --------------------
 
-### Install Guide: Let’s Face It Version 1.0
+### Install Guide: Version 1.0
 ##### Pre-requisites
 * You must have Nodejs installed and configured before proceeding. See https://nodejs.org/en/download/
 
